@@ -317,6 +317,7 @@ namespace EQEmu_Patcher
                     case "513FDC2B5CC63898D7962F0985D5C207": //aslr checksum removed
                     case "2FD5E6243BCC909D9FD0587A156A1165": //https://github.com/xackery/eqemupatcher/issues/20
                     case "26DC13388395A20B73E1B5A08415B0F8": //Legacy of Norrath Custom RoF2 Client https://github.com/xackery/eqemupatcher/issues/16
+                    case "73B218A6C9CABDD33E97E1BB03F8EFAA": //muddpatcher: user RoF2 client variant
                         currentVersion = VersionTypes.Rain_Of_Fear_2;
                         splashLogo.Image = Properties.Resources.rof;
                         break;
