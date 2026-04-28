@@ -271,7 +271,14 @@ namespace EQEmu_Patcher
             var path = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\eqemupatcher.png";
             if (File.Exists(path))
             {
-                splashLogo.Load(path);
+                // Load via memory copy so we don't hold a file handle —
+                // PictureBox.Load(path) keeps the PNG locked, which blocks
+                // the patcher from overwriting it on subsequent updates.
+                using (var ms = new MemoryStream(File.ReadAllBytes(path)))
+                using (var tmp = Image.FromStream(ms))
+                {
+                    splashLogo.Image = new Bitmap(tmp);
+                }
             }
             cts.Cancel();
         }
