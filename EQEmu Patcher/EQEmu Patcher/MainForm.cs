@@ -302,10 +302,7 @@ namespace EQEmu_Patcher
                 }
                 currentVersion = VersionTypes.Rain_Of_Fear_2;
                 splashLogo.Image = Properties.Resources.rof;
-                else
-                {
-                    //StatusLibrary.Log($"You seem to have put me in a {clientVersions[currentVersion].FullName} client directory");
-                }
+                //StatusLibrary.Log($"You seem to have put me in a {clientVersions[currentVersion].FullName} client directory");
 
                 //MessageBox.Show(""+currentVersion);
                 //StatusLibrary.Log($"If you wish to help out, press the scan button on the bottom left and wait for it to complete, then copy paste this data as an Issue on github!");
