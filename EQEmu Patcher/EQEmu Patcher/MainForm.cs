@@ -288,63 +288,20 @@ namespace EQEmu_Patcher
             try
             {
 
-                var hash = UtilityLibrary.GetEverquestExecutableHash(AppDomain.CurrentDomain.BaseDirectory);
-                if (hash == "")
+                // muddpatcher: skip the eqgame.exe md5 allowlist entirely.
+                // Players run various 4GB-patched / aslr-stripped / custom-built RoF2
+                // binaries that all behave identically with our patches; the version
+                // dispatch was rejecting legitimate clients with no functional benefit.
+                // We still require eqgame.exe to be present (sanity check that the
+                // patcher is in an EQ directory) but no longer hash-match it.
+                if (!File.Exists(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "eqgame.exe")))
                 {
                     MessageBox.Show("Please run this patcher in your Everquest directory.");
                     this.Close();
                     return;
                 }
-                switch (hash)
-                {
-                    case "85218FC053D8B367F2B704BAC5E30ACC":
-                        currentVersion = VersionTypes.Secrets_Of_Feydwer;
-                        splashLogo.Image = Properties.Resources.sof;
-                        break;
-                    case "859E89987AA636D36B1007F11C2CD6E0":
-                    case "EF07EE6649C9A2BA2EFFC3F346388E1E78B44B48": //one of the torrented uf clients, used by B&R too
-                        currentVersion = VersionTypes.Underfoot;
-                        splashLogo.Image = Properties.Resources.underfoot;
-                        break;
-                    case "A9DE1B8CC5C451B32084656FCACF1103": //p99 client
-                    case "BB42BC3870F59B6424A56FED3289C6D4": //vanilla titanium
-                        currentVersion = VersionTypes.Titanium;
-                        splashLogo.Image = Properties.Resources.titanium;
-                        break;
-                    case "368BB9F425C8A55030A63E606D184445":
-                        currentVersion = VersionTypes.Rain_Of_Fear;
-                        splashLogo.Image = Properties.Resources.rof;
-                        break;
-                    case "240C80800112ADA825C146D7349CE85B":
-                    case "A057A23F030BAA1C4910323B131407105ACAD14D": //This is a custom ROF2 from a torrent download
-                    case "389709EC0E456C3DAE881A61218AAB3F": // This is a 4gb patched eqgame
-                    case "6574AC667D4C522D21A47F4D00920CC2": // Unknown origin, issue #29
-                    case "AE4E4C995DF8842DAE3127E88E724033": // gangsta of RoT 4gb patched eqgame
-                    case "3B44C6CD42313CB80C323647BCB296EF": //https://github.com/xackery/eqemupatcher/issues/15
-                    case "513FDC2B5CC63898D7962F0985D5C207": //aslr checksum removed
-                    case "2FD5E6243BCC909D9FD0587A156A1165": //https://github.com/xackery/eqemupatcher/issues/20
-                    case "26DC13388395A20B73E1B5A08415B0F8": //Legacy of Norrath Custom RoF2 Client https://github.com/xackery/eqemupatcher/issues/16
-                    case "73B218A6C9CABDD33E97E1BB03F8EFAA": //muddpatcher: user RoF2 client variant
-                        currentVersion = VersionTypes.Rain_Of_Fear_2;
-                        splashLogo.Image = Properties.Resources.rof;
-                        break;
-                    case "6BFAE252C1A64FE8A3E176CAEE7AAE60": //This is one of the live EQ binaries.
-                    case "AD970AD6DB97E5BB21141C205CAD6E68": //2016/08/27
-                        currentVersion = VersionTypes.Broken_Mirror;
-                        splashLogo.Image = Properties.Resources.brokenmirror;
-                        break;
-                    default:
-                        currentVersion = VersionTypes.Unknown;
-                        break;
-                }
-                if (currentVersion == VersionTypes.Unknown)
-                {
-                    if (MessageBox.Show("Unable to recognize the Everquest client in this directory, open a web page to report to devs?", "Visit", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
-                    {
-                        System.Diagnostics.Process.Start("https://github.com/Xackery/eqemupatcher/issues/new?title=A+New+EQClient+Found&body=Hi+I+Found+A+New+Client!+Hash:+" + hash);
-                    }
-                    StatusLibrary.Log($"Unable to recognize the Everquest client in this directory, send to developers: {hash}");
-                }
+                currentVersion = VersionTypes.Rain_Of_Fear_2;
+                splashLogo.Image = Properties.Resources.rof;
                 else
                 {
                     //StatusLibrary.Log($"You seem to have put me in a {clientVersions[currentVersion].FullName} client directory");
