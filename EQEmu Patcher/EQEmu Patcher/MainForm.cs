@@ -482,6 +482,15 @@ namespace EQEmu_Patcher
                     continue;
                 }
 
+                // muddpatcher: never overwrite eqhost.txt once a player has one.
+                // Players customize it (loginserver address, custom builds) and the
+                // shipped copy in rof/ is only meant as a default for first install.
+                if (string.Equals(entry.name, "eqhost.txt", StringComparison.OrdinalIgnoreCase) && File.Exists(path))
+                {
+                    currentBytes += entry.size;
+                    continue;
+                }
+
                 // check if file exists and is already patched
                 if (File.Exists(path)) {
                     var md5 = UtilityLibrary.GetMD5(path);
