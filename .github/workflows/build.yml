@@ -6,10 +6,12 @@ on:
     paths:
       - 'EQEmu Patcher/**'
       - '.github/workflows/**'
+      - 'rof/**'
   pull_request:
     branches: [ "master" ]
     paths:
       - 'EQEmu Patcher/**'
+      - 'rof/**'
       - '.github/workflows/**'
 
 env:
