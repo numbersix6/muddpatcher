@@ -1,17 +1,17 @@
-version: 202605024da578c7e4945b31f69f9682b3ba4d6b
+version: 2026050370499c375d238e5f55162a8a7f7fd6a4
 downloadprefix: https://raw.githubusercontent.com/numbersix6/muddpatcher/master/rof/
 downloads:
 - name: BaseData.txt
   md5: 878851da61b5b3d1ea4963fa9073f212
-  date: "20260502"
+  date: "20260503"
   size: 61817
 - name: SkillCaps.txt
   md5: 0ccc8e9604ac90da2aa1b704330edc02
-  date: "20260502"
+  date: "20260503"
   size: 920675
 - name: dbstr_us.txt
   md5: ae29b43ecfac658015ee83480f2bc123
-  date: "20260502"
+  date: "20260503"
   size: 6326054
 - name: eqemupatcher.png
   md5: 63cc9e97d953bf320813a576ab0e8aee
@@ -22,10 +22,10 @@ downloads:
   date: "20260502"
   size: 38
 - name: spells_us.txt
-  md5: a4f368477360c3ace34501068d3a8998
-  date: "20260502"
-  size: 27632902
+  md5: a2951e7c53990a0046ba7111ef389435
+  date: "20260503"
+  size: 27635624
 - name: spells_us_norequirements.txt
-  md5: 2967be5cef13d0390afda7bb2ce23c57
-  date: "20260502"
-  size: 26830631
+  md5: 7b0cab09b6986ff7f0ec7bc17c802ff9
+  date: "20260503"
+  size: 26833353
